@@ -1,7 +1,13 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+User.destroy_all
+Friend.destroy_all
+
+harum = User.create(name: "Harum Helmy", password: "boops", email: "harumendhah@gmail.com")
+austen = User.create(name: "Austen MC", password: "butts", email: "amackcrane@eparade.net")
+
+helen = Friend.create(user_id: harum.id, name: "Helen", pronouns: "they/them", appreciation: "I love Helen because they are a thoughtful person who loves deeply and fights for what they believe in. I love that they are very critical, we like to read the same books, etc etc", starred: true)
+
+dani = Friend.create(user_id: harum.id, name: "Dani", pronouns: "she/her", appreciation: "Dani is the best, she makes me laugh and takes me to Costco, she sends me memes, makes the best food, and loves fiercely", starred: true)
+
+
+# interaction1 = Interaction.create(user_id: harum.id, friend_id: helen.id,  )
+

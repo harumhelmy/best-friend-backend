@@ -21,6 +21,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
+    
   end
   
   def user_serializer_options
