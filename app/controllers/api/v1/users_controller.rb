@@ -1,6 +1,5 @@
 class Api::V1::UsersController < ApplicationController
 
-  # TODO: SERIALIZE 
   def create
     @user = User.create(user_params)
     if @user.valid?
