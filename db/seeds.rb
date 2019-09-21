@@ -8,6 +8,3 @@ helen = Friend.create(user_id: harum.id, name: "Helen", pronouns: "they/them", a
 
 dani = Friend.create(user_id: harum.id, name: "Dani", pronouns: "she/her", appreciation: "Dani is the best, she makes me laugh and takes me to Costco, she sends me memes, makes the best food, and loves fiercely", starred: true)
 
-
-# interaction1 = Interaction.create(user_id: harum.id, friend_id: helen.id,  )
-
