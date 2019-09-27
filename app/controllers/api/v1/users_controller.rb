@@ -11,12 +11,12 @@ class Api::V1::UsersController < ApplicationController
 
   def index
     users = User.all 
-    render json: users 
+    render json: users.to_json(user_serializer_options)
   end 
 
   def show
     user = User.find(params[:id])
-    render json: { user: user, friends: user.friends }
+    render json: { user: user, friends: user.friends }.to_json(user_serializer_options)
   end
 
   def update
