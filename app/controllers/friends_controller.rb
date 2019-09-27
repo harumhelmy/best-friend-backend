@@ -1,12 +1,11 @@
 class FriendsController < ApplicationController
 
   def index
-    friends = Friend.all 
+    friends = Friend.all
     render json: friends
   end 
 
   def create
-    byebug
     friend = Friend.create(friend_params)
     render json: friend 
   end
@@ -17,7 +16,9 @@ class FriendsController < ApplicationController
   end 
 
   def update
-
+    friend = Friend.find(params[:id])
+    friend.update
+    render json: friend
   end 
 
   def destroy
@@ -31,25 +32,11 @@ class FriendsController < ApplicationController
   end 
 
   # def friend_serializer_options
-  #   {
-  #     :include => {
-  #       :user => {
-  #         :except => [:password_digest, :email, :created_at, :updated_at]
-  #       },
-  #       }, 
-  #       :interaction => {
-  #         :except => [:created_at, :updated_at]
-  #       },
-  #       :important_date => {
-  #         :except => [:created_at, :updated_at]
-  #       }, 
-  #       :notes => {
-  #         :except => [:created_at, :updated_at]
-  #       }
-  #     },
-  #     :except => [:user_id, :created_at, :updated_at]
-  #   }
-  # end 
+  #   :include => {
+  #     :bird => {:only => [:name, :species]},
+  #     :location => {:only => [:latitude, :longitude]}
+  #   }, :except => [:updated_at])
 
+  # end 
 
 end

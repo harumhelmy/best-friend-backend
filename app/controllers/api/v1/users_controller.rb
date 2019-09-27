@@ -9,16 +9,15 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  # do we even need this 
   def index
     users = User.all 
-    render json: users.to_json(user_serializer_options)
+    render json: users 
   end 
 
   def show
     user = User.find(params[:id])
-    render json: user.to_json(user_serializer_options)
-  end 
+    render json: { user: user, friends: user.friends }
+  end
 
   def update
     user = User.find(params[:id])
@@ -38,15 +37,16 @@ class Api::V1::UsersController < ApplicationController
   def user_serializer_options
     {
       :include => {
-        :friends => {
+        :friends => { :include => {
+          :interactions => { :except => [:created_at, :updated_at] },
+          :notes => { :except => [:user_id]},
+          :important_dates => { :except => [:created_at, :updated_at] }
+        },
           :except => [:created_at, :updated_at]
         }
       }, 
       :except => [:password_digest, :email, :created_at, :updated_at]
     }
-    #  gotta include friends and probably last interaction here, include friend name and interaction.last or something like that? 
-
-    # for the reminder and countdown, will have to fetch from important_dates and interactions 
   end 
 
 end
