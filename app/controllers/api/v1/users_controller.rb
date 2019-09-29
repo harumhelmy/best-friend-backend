@@ -16,7 +16,8 @@ class Api::V1::UsersController < ApplicationController
 
   def show
     user = User.find(params[:id])
-    render json: { user: user, friends: user.friends }.to_json(user_serializer_options)
+    serialized_friends = user.friends.map { |friend| FriendSerializer.new(friend) }
+    render json: { user: user, friends: serialized_friends }
   end
 
   def update
@@ -34,6 +35,7 @@ class Api::V1::UsersController < ApplicationController
     params.require(:user).permit(:username, :name, :email, :password)
   end
   
+  # for posterity
   def user_serializer_options
     {
       :include => {

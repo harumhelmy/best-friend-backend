@@ -22,7 +22,6 @@ class ImportantDatesController < ApplicationController
   def destroy
   end
 
-
   private
 
   def important_date_params

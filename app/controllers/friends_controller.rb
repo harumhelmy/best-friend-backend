@@ -17,12 +17,14 @@ class FriendsController < ApplicationController
 
   def update
     friend = Friend.find(params[:id])
-    friend.update
+    friend.update(friend_params)
     render json: friend
   end 
 
   def destroy
-
+    friend = Friend.find(params[:id])
+    friend.destroy
+    render json: friend
   end 
 
   private
@@ -31,6 +33,7 @@ class FriendsController < ApplicationController
     params.require(:friend).permit(:name, :user_id, :pronouns, :appreciation, :starred)
   end 
 
+  # FIND THE SERIALIZER IN THE SERIALIZERS FOLDER
   # def friend_serializer_options
   #   :include => {
   #     :bird => {:only => [:name, :species]},
