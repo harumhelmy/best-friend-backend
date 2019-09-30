@@ -16,9 +16,15 @@ class InteractionsController < ApplicationController
   end
 
   def update
+    interaction = Interaction.find(params[:id])
+    interaction.update(interaction_params)
+    render json: interaction
   end
 
   def destroy
+    interaction = Interaction.find(params[:id])
+    interaction.destroy
+    render json: interaction
   end 
 
   private

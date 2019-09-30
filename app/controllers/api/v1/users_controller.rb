@@ -14,6 +14,7 @@ class Api::V1::UsersController < ApplicationController
     render json: users.to_json(user_serializer_options)
   end 
 
+  # the bulk of the AJAX request happens here
   def show
     user = User.find(params[:id])
     serialized_friends = user.friends.map { |friend| FriendSerializer.new(friend) }
@@ -35,7 +36,6 @@ class Api::V1::UsersController < ApplicationController
     params.require(:user).permit(:username, :name, :email, :password)
   end
   
-  # for posterity
   def user_serializer_options
     {
       :include => {

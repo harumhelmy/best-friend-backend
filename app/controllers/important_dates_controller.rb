@@ -6,7 +6,6 @@ class ImportantDatesController < ApplicationController
   end 
 
   def create
-    byebug
     important_date = ImportantDate.create(important_date_params)
     render json: important_date 
   end
@@ -17,9 +16,14 @@ class ImportantDatesController < ApplicationController
   end
 
   def update
+    important_date = ImportantDate.find(params[:id])
+    render json: important_date
   end
 
   def destroy
+    important_date = ImportantDate.find(params[:id])
+    important_date.destroy
+    render json: important_date
   end
 
   private
