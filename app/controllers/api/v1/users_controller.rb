@@ -14,12 +14,22 @@ class Api::V1::UsersController < ApplicationController
     render json: users.to_json(user_serializer_options)
   end 
 
-  # the bulk of the AJAX request happens here
   def show
     user = User.find(params[:id])
     serialized_friends = user.friends.map { |friend| FriendSerializer.new(friend) }
-    render json: { user: user, friends: serialized_friends }
+    serialized_interactions = user.interactions.map { |interaction| InteractionSerializer.new(interaction) }
+    serialized_important_dates = user.important_dates.map { |date| ImportantDateSerializer.new(date) }
+    render json: { user: user, 
+      friends: serialized_friends, 
+      interactions: serialized_interactions, 
+      important_dates: serialized_important_dates }
   end
+
+  # experimental
+  # def get_interactions
+  #   user = User.find(params[:id])
+  #   render json: { interactions: serialized_interactions }
+  # end
 
   def update
     user = User.find(params[:id])

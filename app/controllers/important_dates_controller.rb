@@ -29,7 +29,7 @@ class ImportantDatesController < ApplicationController
   private
 
   def important_date_params
-    params.require(:important_date).permit(:name, :date, :user_id, :friend_id, :reminder, :note)
+    params.require(:important_date).permit(:title, :date, :user_id, :friend_id, :reminder, :note)
   end 
   
 end
