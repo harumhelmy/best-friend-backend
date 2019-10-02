@@ -1,8 +1,7 @@
 class Api::V1::UsersController < ApplicationController
-  skip_before_action :authorized, only: [:create]
+  skip_before_action :authorized, only: [:create, :index]
 
   def create 
-    # byebug
     @user = User.create(user_params)
     if @user.valid?
       @token = encode_token( user_id: @user.id )
@@ -21,7 +20,8 @@ class Api::V1::UsersController < ApplicationController
     serialized_friends = @user.friends.map { |friend| FriendSerializer.new(friend) }
     serialized_interactions = @user.interactions.map { |interaction| InteractionSerializer.new(interaction) }
     serialized_important_dates = @user.important_dates.map { |date| ImportantDateSerializer.new(date) }
-    render json: { user: @user.to_json(user_serializer_options), 
+    render json: { 
+      user: @user.to_json(user_serializer_options), 
       friends: serialized_friends, 
       interactions: serialized_interactions, 
       important_dates: serialized_important_dates }
