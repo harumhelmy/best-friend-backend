@@ -12,5 +12,5 @@ Rails.application.routes.draw do
   resources :notes
   resources :interactions
   resources :friends
-  # resources :users
+
 end

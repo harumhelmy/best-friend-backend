@@ -1,11 +1,11 @@
 class Api::V1::UsersController < ApplicationController
   skip_before_action :authorized, only: [:create]
 
-  def create
-    byebug
+  def create 
+    # byebug
     @user = User.create(user_params)
     if @user.valid?
-      @token = encode_token(user_id: @user.id)
+      @token = encode_token( user_id: @user.id )
       render json: { user: @user.to_json(user_serializer_options), jwt: @token }, status: :created
     else 
       render json: { error: 'failed to create user' }, status: :not_acceptable
@@ -17,12 +17,11 @@ class Api::V1::UsersController < ApplicationController
     render json: users.to_json(user_serializer_options)
   end 
 
-  def show
-    user = User.find(params[:id])
-    serialized_friends = user.friends.map { |friend| FriendSerializer.new(friend) }
-    serialized_interactions = user.interactions.map { |interaction| InteractionSerializer.new(interaction) }
-    serialized_important_dates = user.important_dates.map { |date| ImportantDateSerializer.new(date) }
-    render json: { user: user, 
+  def profile # GET /api/v1/profile
+    serialized_friends = @user.friends.map { |friend| FriendSerializer.new(friend) }
+    serialized_interactions = @user.interactions.map { |interaction| InteractionSerializer.new(interaction) }
+    serialized_important_dates = @user.important_dates.map { |date| ImportantDateSerializer.new(date) }
+    render json: { user: @user.to_json(user_serializer_options), 
       friends: serialized_friends, 
       interactions: serialized_interactions, 
       important_dates: serialized_important_dates }
