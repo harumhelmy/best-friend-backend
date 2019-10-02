@@ -4,4 +4,6 @@ class User < ApplicationRecord
   has_many :interactions
   has_many :important_dates
   validates :username, uniqueness: {case_sensitive: false}
+
+
 end

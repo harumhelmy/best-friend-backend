@@ -1,9 +1,12 @@
 class Api::V1::UsersController < ApplicationController
+  skip_before_action :authorized, only: [:create]
 
   def create
+    byebug
     @user = User.create(user_params)
     if @user.valid?
-      render json: @user.to_json(user_serializer_options), status: :created
+      @token = encode_token(user_id: @user.id)
+      render json: { user: @user.to_json(user_serializer_options), jwt: @token }, status: :created
     else 
       render json: { error: 'failed to create user' }, status: :not_acceptable
     end
@@ -25,7 +28,7 @@ class Api::V1::UsersController < ApplicationController
       important_dates: serialized_important_dates }
   end
 
-  # experimental
+  # EXPERIMENTING
   # def get_interactions
   #   user = User.find(params[:id])
   #   render json: { interactions: serialized_interactions }

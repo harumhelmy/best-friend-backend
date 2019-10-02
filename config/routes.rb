@@ -4,7 +4,7 @@ Rails.application.routes.draw do
       resources :users
       post '/login', to: 'auth#create'
       get '/profile', to: 'users#profile'
-      get '/users/:id/get_interactions', to: 'users#get_interactions'
+      # get '/users/:id/get_interactions', to: 'users#get_interactions'
     end
   end
   
