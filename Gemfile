@@ -19,6 +19,12 @@ gem 'bcrypt', '~> 3.1.7'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
+# use twilio
+gem 'twilio-ruby', '~> 5.28.0'
+
+# use delayed job for running background jobs
+gem 'delayed_job_active_record'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

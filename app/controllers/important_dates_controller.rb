@@ -17,6 +17,8 @@ class ImportantDatesController < ApplicationController
 
   def update
     important_date = ImportantDate.find(params[:id])
+    byebug
+    important_date.update(important_date_params)
     render json: important_date
   end
 

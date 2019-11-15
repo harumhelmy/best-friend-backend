@@ -6,8 +6,15 @@ class FriendsController < ApplicationController
   end 
 
   def create
-    friend = Friend.create(friend_params)
-    render json: friend 
+    friend = Friend.new(friend_params)
+
+    if friend.valid?
+      friend.save
+      render json: friend 
+    else
+      render json: { message: 'oop, your friend has to have a name' }
+    end
+
   end
 
   def show
@@ -17,6 +24,7 @@ class FriendsController < ApplicationController
 
   def update
     friend = Friend.find(params[:id])
+    byebug
     friend.update(friend_params)
     render json: friend
   end 
